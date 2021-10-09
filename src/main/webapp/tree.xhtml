@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="layout.xhtml">
+	<style>
+#imgDelete {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	display: none;
+
+	/** Demo **/
+	.
+	ui-grid-row
+	.ui-grid-col-2,
+	.ui-grid-row
+	.ui-grid-col-10
+	{
+	padding
+	:
+	0.5em
+	0;
+}
+
+.ui-outputlabel {
+	font-weight: bold;
+}
+
+.ui-orderlist .ui-orderlist-list {
+	height: auto;
+}
+
+.ui-orderlist .ui-grid-row .ui-grid-col-2, .ui-orderlist .ui-grid-row .ui-grid-col-10
+	{
+	padding: 0;
+}
+}
+</style>
+	<ui:define name="content">
+
+		<h:form id="itemForm">
+			<p:growl id="messages" showDetail="true" />
+			<div class="card">
+				<h:form>
+					<p:growl id="messages" showDetail="true" />
+
+					<p:tree id="docs" value="#{treeContextMenuView.root}" var="doc"
+						selectionMode="single"
+						selection="#{treeContextMenuView.selectedNode}" dynamic="true">
+
+						<p:ajax event="expand"
+							listener="#{treeContextMenuView.onNodeExpand}"
+							update="@form:messages" />
+						 
+						<p:ajax event="collapse" listener="#{treeContextMenuView.onNodeCollapse}"
+							update="@form:messages" />
+						<p:ajax event="select" listener="#{treeContextMenuView.onNodeSelect}"
+							update="@form:messages" />
+						<p:ajax event="unselect" listener="#{treeContextMenuView.onNodeUnselect}"
+							update="@form:messages" />
+					 
+
+
+						<p:treeNode expandedIcon="pi pi-folder-open"
+							collapsedIcon="pi pi-folder">
+							<h:outputText value="#{doc.name}" />
+						</p:treeNode>
+						<p:treeNode type="app" icon="pi pi-save">
+							<h:outputText value="#{doc.name}" />
+						</p:treeNode>
+						<p:treeNode type="document" icon="pi pi-file">
+							<h:outputText value="#{doc.name}" />
+						</p:treeNode>
+						<p:treeNode type="excel" icon="pi pi-file-excel">
+							<h:outputText value="#{doc.name}" />
+						</p:treeNode>
+						<p:treeNode type="travel" icon="pi pi-file-pdf">
+							<h:outputText value="#{doc.name}" />
+						</p:treeNode>
+						<p:treeNode type="picture" icon="pi pi-image">
+							<h:outputText value="#{doc.name}" />
+						</p:treeNode>
+						<p:treeNode type="video" icon="pi pi-video">
+							<h:outputText value="#{doc.name}" />
+						</p:treeNode>
+					</p:tree>
+
+
+				</h:form>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>
+</html>
